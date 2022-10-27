@@ -1,0 +1,9 @@
+Md. Hasibur Rahman (Omi)1:25 PM 
+- Registration 
+- Login 
+- With OTP 
+- Post on my feed 
+- People's post. on my feed 
+- Like, comment on other people's posts 
+- Withdraw like from other people's posts 
+- If a post has my like, then the post will show "liked"
