@@ -16,7 +16,7 @@ from django.conf import settings
 from .models import User
 from .serializers import RegisterSerializer, SetNewPasswordSerializer, ResetPasswordEmailRequestSerializer, EmailVerificationSerializer, LoginSerializer, LogoutSerializer
 from .utils import Util
-from .renderers import UserRenderer
+# from .renderers import UserRenderer
 
 
 
@@ -29,7 +29,7 @@ class CustomRedirect(HttpResponsePermanentRedirect):
 class RegisterView(generics.GenericAPIView):
 
     serializer_class = RegisterSerializer
-    renderer_classes = (UserRenderer,)
+    # renderer_classes = (UserRenderer,)
 
     def post(self, request):
         user = request.data
