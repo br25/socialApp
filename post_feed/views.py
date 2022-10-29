@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, DestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, DestroyAPIView, GenericAPIView
 from rest_framework.response import Response
 from .models import Post, Comment, Like
 from .serializers import PostSerializer, CommentSerializer, LikeSerializer
@@ -8,6 +8,7 @@ from .serializers import PostSerializer, CommentSerializer, LikeSerializer
 class PostList(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
 
 class PostDetail(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
@@ -41,3 +42,17 @@ class PostCommentDelete(DestroyAPIView):
         queryset = self.get_object()
         queryset.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class LikePost(GenericAPIView):
+    serializer_class = LikeSerializer
+    queryset = Like.objects.all()
+    def post(self, request, pk):
+        like = self.get_queryset().filter(post_id=pk)
+
+        if len(like) == 0:
+            self.get_serializer(data={})
+
+        print(like)
+
+        return Response("liked")
