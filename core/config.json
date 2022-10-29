@@ -1,0 +1,6 @@
+{
+    "NAME": "mysqlDB",
+    "USER": "root",
+    "PASSWORD": "root",
+    "HOST": "localhost"
+}

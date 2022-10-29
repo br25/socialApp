@@ -1,10 +1,15 @@
 from pathlib import Path
+import json
 import os
 import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+scriptpath = os.path.dirname(__file__)
+filename = os.path.join(scriptpath, 'config.json')
+
+config = json.load(open(filename))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -16,7 +21,6 @@ SECRET_KEY = 'django-insecure-niljfhg6ogicrt5+kv)1hn9mmm)wrkgku%hdz6r8gla4=!a7mi
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -72,11 +76,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysqlDB',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST':'localhost',
-        'PORT':'3306',
+        'NAME': config.get('NAME', 'django'),
+        'USER': config.get('USER', 'root'),
+        'PASSWORD': config.get('PASSWORD', ''),
+        'HOST': config.get('HOST', 'localhost'),
+        'PORT': '3306',
     }
 }
 
@@ -123,8 +127,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
-#Customization own
+# Customization own
 AUTH_USER_MODEL = 'account.User'
 
 # rest framework edit
@@ -176,9 +179,7 @@ CORS_ORIGIN_REGEX_WHITELIST = [
 # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587 
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'testsender@mail.com'
 EMAIL_HOST_PASSWORD = 'ewhxokzfwkweswpq'
-
-
