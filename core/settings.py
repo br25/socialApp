@@ -146,16 +146,6 @@ SIMPLE_JWT = {
 }
 
 
-# SWAGGER_SETTINGS = {
-#     'SECURITY_DEFINITIONS': {
-#         'Bearer': {
-#             'type': 'apiKey',
-#             'name': 'Authorization',
-#             'in': 'header'
-#         }
-#     }
-# }
-
 
 # CORS WHITELIST
 CORS_ORIGIN_WHITELIST = [
@@ -169,17 +159,11 @@ CORS_ORIGIN_REGEX_WHITELIST = [
 ]
 
 
-# EMAIL_USE_TLS = True
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'testsender@gmail.com'
-# EMAIL_HOST_PASSWORD = '****'
-# .env file create and setup
-# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'testsender@mail.com'
-EMAIL_HOST_PASSWORD = 'ewhxokzfwkweswpq'
+EMAIL_HOST_USER = 'testsender@gmail.com'
+EMAIL_HOST_PASSWORD = '****'
+
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
