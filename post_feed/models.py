@@ -17,7 +17,6 @@ class Post(BaseModel):
     owner = models.ForeignKey(
         User, related_name='user_posts', on_delete=models.CASCADE)
     content = models.TextField(max_length=255, blank=True)
-    comments = models.ForeignKey('post_feed.Comment', blank=True, null=True, default=None, on_delete=models.CASCADE, related_name="parent_post")
 
     def __str__(self):
         return self.content
@@ -28,7 +27,7 @@ class Comment(BaseModel):
     owner = models.ForeignKey(
         User, related_name='comment_owner', on_delete=models.CASCADE)
     post = models.ForeignKey(
-        Post, related_name='comment_post', on_delete=models.CASCADE)
+        Post, related_name='comments', on_delete=models.CASCADE)
     content = models.CharField(max_length=255)
 
     def __str__(self):

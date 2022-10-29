@@ -14,14 +14,14 @@ class PostDetail(RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+    print(queryset.values())
 
 class PostComments(ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    lookup_field = "post_id"
 
     def get(self, request, pk, *args, **kwargs):
-        queryset = Comment.objects.all().filter(post=pk)
+        queryset = Comment.objects.all().filter(post_id=pk)
 
         serializer = self.serializer_class(queryset, many=True)
 
@@ -48,11 +48,19 @@ class LikePost(GenericAPIView):
     serializer_class = LikeSerializer
     queryset = Like.objects.all()
     def post(self, request, pk):
-        like = self.get_queryset().filter(post_id=pk)
-
-        if len(like) == 0:
-            self.get_serializer(data={})
+        current_user =  request.user
+        like = self.get_queryset().filter(post_id=pk, owner_id=int(request.data.get('owner')))
 
         print(like)
+        if len(like) == 0:
+            serializer = self.get_serializer(data={"post_id": pk, "owner": int(request.data.get('owner'))})
+            serializer.is_valid(raise_exception=True)
+            serializer.save(post_id=pk)
 
-        return Response("liked")
+            return Response("liked")
+        else:
+            for item in like:
+                print(item)
+                item.delete()
+
+            return Response("unliked")
